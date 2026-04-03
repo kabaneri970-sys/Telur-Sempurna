@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guesmi Electric Egg Boiler - 6 Mode Cerdas, 4 Slot Telur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        warm: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            50% { box-shadow: 0 0 20px 10px rgba(59, 130, 246, 0.1); }
+        }
+        
+        .animate-fade-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        
+        .scroll-animate { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .scroll-animate.visible { opacity: 1; transform: translateY(0); }
+        
+        .mode-card:hover .mode-icon {
+            transform: scale(1.1) rotate(5deg);
+            transition: transform 0.3s ease;
+        }
+        .mode-card .mode-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .product-img-hover {
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        .product-img-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+        
+        .cta-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .cta-btn:hover::before {
+            left: 100%;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.4);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.15);
+        }
+        
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .sticky-buy {
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        .sticky-buy.show {
+            transform: translateY(0);
+        }
+
+        .toast {
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-[#F2F2F2] font-sans text-stone-900 antialiased">
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1202889101065810');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1202889101065810&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+
+    <!-- Main Container -->
+    <div class="max-w-[1600px] mx-auto p-2 sm:p-4 lg:p-6">
+
+        <!-- Hero Section -->
+        <section class="relative rounded-[2rem] overflow-hidden bg-stone-900 min-h-[95vh] flex items-center">
+            <div class="absolute inset-0">
+                <img src="https://z-cdn-media.chatglm.cn/files/62446c07-3c25-44df-a83e-7a90b818c2a5.jpg?auth_key=1875221104-e7d21b024504479f905c745551aa4ef6-0-6fed7997db008f8287e7a166090c071e" 
+                     alt="Kitchen Background" class="w-full h-full object-cover opacity-30 scale-105">
+                <div class="absolute inset-0 bg-gradient-to-r from-stone-900 via-stone-900/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-stone-900/50"></div>
+            </div>
+            
+            <div class="relative z-10 w-full px-6 sm:px-12 lg:px-20 py-20">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <div class="space-y-8">
+                        <div class="animate-fade-up" style="opacity:0;">
+                            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full px-5 py-2.5 text-xs font-semibold tracking-widest uppercase text-white/80">
+                                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                                Best Seller 2026
+                            </span>
+                        </div>
+                        
+                        <h1 class="animate-fade-up delay-100" style="opacity:0;">
+                            <span class="block text-5xl sm:text-6xl lg:text-7xl font-800 text-white leading-[1.05] tracking-tight">
+                                Telur Sempurna,
+                            </span>
+                            <span class="block text-5xl sm:text-6xl lg:text-7xl font-800 leading-[1.05] tracking-tight mt-2" style="background: linear-gradient(135deg, #fde047, #facc15, #eab308); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                Setiap Pagi
+                            </span>
+                        </h1>
+                        
+                        <p class="animate-fade-up delay-200 text-lg sm:text-xl font-light text-white/70 leading-relaxed max-w-lg" style="opacity:0;">
+                            Guesmi Electric Egg Boiler — 6 mode cerdas, 4 slot telur, matang merata hanya dengan satu sentuhan. Sarapan praktis tanpa repot.
+                        </p>
+                        
+                        <div class="animate-fade-up delay-300 flex flex-wrap gap-4" style="opacity:0;">
+                            <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-4 text-center min-w-[100px]">
+                                <div class="text-2xl font-bold text-white">4</div>
+                                <div class="text-xs text-white/50 mt-1">Slot Telur</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-4 text-center min-w-[100px]">
+                                <div class="text-2xl font-bold text-white">6</div>
+                                <div class="text-xs text-white/50 mt-1">Mode Masak</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-4 text-center min-w-[100px]">
+                                <div class="text-2xl font-bold text-white">200W</div>
+                                <div class="text-xs text-white/50 mt-1">Hemat Daya</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-4 text-center min-w-[100px]">
+                                <div class="text-2xl font-bold text-white">24Jam</div>
+                                <div class="text-xs text-white/50 mt-1">Reservasi</div>
+                            </div>
+                        </div>
+                        
+                        <div class="animate-fade-up delay-400 flex flex-wrap gap-4" style="opacity:0;">
+                            <a href="https://www.tokopedia.com/allesware/guesmi-electric-egg-boiler-4-slot-with-6-preset-modes-1734971950914372678" 
+                               target="_blank"
+                               onclick="fbq('track', 'ViewContent', {content_name: 'Guesmi Egg Boiler', content_category: 'Kitchen Appliance'});"
+                               class="cta-btn inline-flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white font-semibold text-base px-8 py-4 rounded-full">
+                                <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                                Beli di Tokopedia
+                            </a>
+                            <a href="#fitur" 
+                               class="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white font-medium text-base px-8 py-4 rounded-full transition-all duration-300">
+                                Lihat Fitur
+                                <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-fade-up delay-300 flex justify-center lg:justify-end" style="opacity:0;">
+                        <div class="relative">
+                            <div class="absolute -inset-8 bg-yellow-400/20 rounded-full blur-3xl"></div>
+                            <img src="https://z-cdn-media.chatglm.cn/files/2a79c0e6-ebee-4dec-9c98-d5c8d960a4c2.jpg?auth_key=1875221104-d5973147738849adaca782ba2c6a0ed2-0-7f271ad2ebb3fce3d196d7a9fdb962f4" 
+                                 alt="Guesmi Electric Egg Boiler" 
+                                 class="relative w-full max-w-md lg:max-w-lg rounded-3xl animate-float drop-shadow-2xl">
+                            <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-2xl px-5 py-3 flex items-center gap-3">
+                                <div class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center">
+                                    <i data-lucide="star" class="w-5 h-5 text-yellow-900 fill-yellow-900"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold text-stone-900">4.9 Rating</div>
+                                    <div class="text-xs text-stone-500">500+ Terjual</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+                <span class="text-white/40 text-xs tracking-widest uppercase">Scroll</span>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-white/40"></i>
+            </div>
+        </section>
+
+        <!-- Trust Bar -->
+        <section class="mt-6 scroll-animate">
+            <div class="bg-white rounded-2xl border border-stone-200 p-6 sm:p-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="shield-check" class="w-6 h-6 text-green-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm text-stone-900">Garansi Resmi</div>
+                            <div class="text-xs text-stone-500">Produk original</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="truck" class="w-6 h-6 text-blue-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm text-stone-900">Gratis Ongkir</div>
+                            <div class="text-xs text-stone-500">Seluruh Indonesia</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="rotate-ccw" class="w-6 h-6 text-purple-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm text-stone-900">30 Hari Retur</div>
+                            <div class="text-xs text-stone-500">Tanpa ribet</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="headphones" class="w-6 h-6 text-orange-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm text-stone-900">CS 24 Jam</div>
+                            <div class="text-xs text-stone-500">Siap membantu</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6 Mode Cerdas Section -->
+        <section id="fitur" class="mt-24 scroll-animate">
+            <div class="text-center mb-16">
+                <span class="inline-block text-xs font-semibold tracking-[0.15em] uppercase text-stone-400 mb-4">6 Mode Cerdas</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-600 tracking-tight text-stone-900">
+                    Satu Mesin,<br>
+                    <span class="text-stone-400">Berbagai Kreasi</span>
+                </h2>
+                <p class="mt-4 text-lg font-light text-stone-500 max-w-2xl mx-auto">
+                    Pilih tingkat kematangan telur sesuai selera, atau buat yogurt dan custard — semua dalam satu alat.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+                <div class="mode-card bg-white rounded-3xl border border-stone-200 p-6 text-center cursor-default hover:border-yellow-300 transition-all duration-300">
+                    <div class="mode-icon w-16 h-16 mx-auto mb-4 bg-orange-50 rounded-2xl flex items-center justify-center text-3xl">🥚</div>
+                    <div class="text-xs font-bold text-stone-400 tracking-wider mb-1">L1</div>
+                    <div class="font-semibold text-sm text-stone-900">Soft Boiled</div>
+                    <div class="text-xs text-stone-400 mt-1">Setengah Matang</div>
+                </div>
+                <div class="mode-card bg-white rounded-3xl border border-stone-200 p-6 text-center cursor-default hover:border-yellow-300 transition-all duration-300">
+                    <div class="mode-icon w-16 h-16 mx-auto mb-4 bg-amber-50 rounded-2xl flex items-center justify-center text-3xl">♨️</div>
+                    <div class="text-xs font-bold text-stone-400 tracking-wider mb-1">L2</div>
+                    <div class="font-semibold text-sm text-stone-900">Hot Spring</div>
+                    <div class="text-xs text-stone-400 mt-1">Telur Onsen</div>
+                </div>
+                <div class="mode-card bg-white rounded-3xl border border-stone-200 p-6 text-center cursor-default hover:border-yellow-300 transition-all duration-300">
+                    <div class="mode-icon w-16 h-16 mx-auto mb-4 bg-red-50 rounded-2xl flex items-center justify-center text-3xl">🍳</div>
+                    <div class="text-xs font-bold text-stone-400 tracking-wider mb-1">L3</div>
+                    <div class="font-semibold text-sm text-stone-900">Hard Boiled</div>
+                    <div class="text-xs text-stone-400 mt-1">Telur Matang</div>
+                </div>
+                <div class="mode-card bg-white rounded-3xl border border-stone-200 p-6 text-center cursor-default hover:border-yellow-300 transition-all duration-300">
+                    <div class="mode-icon w-16 h-16 mx-auto mb-4 bg-yellow-50 rounded-2xl flex items-center justify-center text-3xl">🍮</div>
+                    <div class="text-xs font-bold text-stone-400 tracking-wider mb-1">L4</div>
+                    <div class="font-semibold text-sm text-stone-900">Custard</div>
+                    <div class="text-xs text-stone-400 mt-1">Steamed Egg</div>
+                </div>
+                <div class="mode-card bg-white rounded-3xl border border-stone-200 p-6 text-center cursor-default hover:border-yellow-300 transition-all duration-300">
+                    <div class="mode-icon w-16 h-16 mx-auto mb-4 bg-amber-50 rounded-2xl flex items-center justify-center text-3xl">🍵</div>
+                    <div class="text-xs font-bold text-stone-400 tracking-wider mb-1">L5</div>
+                    <div class="font-semibold text-sm text-stone-900">Tea Egg</div>
+                    <div class="text-xs text-stone-400 mt-1">Telur Teh</div>
+                </div>
+                <div class="mode-card bg-white rounded-3xl border border-stone-200 p-6 text-center cursor-default hover:border-yellow-300 transition-all duration-300">
+                    <div class="mode-icon w-16 h-16 mx-auto mb-4 bg-pink-50 rounded-2xl flex items-center justify-center text-3xl">🥛</div>
+                    <div class="text-xs font-bold text-stone-400 tracking-wider mb-1">L6</div>
+                    <div class="font-semibold text-sm text-stone-900">Yogurt</div>
+                    <div class="text-xs text-stone-400 mt-1">Fermentasi</div>
+                </div>
+            </div>
+            
+            <div class="mt-12 scroll-animate">
+                <div class="rounded-3xl overflow-hidden product-img-hover">
+                    <img src="https://z-cdn-media.chatglm.cn/files/5e9bae00-1772-458d-8616-a35c6e94251e.jpg?auth_key=1875221104-7f714b46bb644c2085eed194ce02a2d6-0-74d83d45430872d50bb439f2fee49eb9" 
+                         alt="6 Mode Masak Guesmi Egg Boiler" 
+                         class="w-full h-auto object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="mt-24 scroll-animate">
+            <div class="text-center mb-16">
+                <span class="inline-block text-xs font-semibold tracking-[0.15em] uppercase text-stone-400 mb-4">Mengapa Guesmi?</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-600 tracking-tight text-stone-900">
+                    Dirancang untuk<br>
+                    <span class="text-stone-400">Kehidupan Modern</span>
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="feature-card bg-white rounded-[1.5rem] border border-stone-200 overflow-hidden group">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://z-cdn-media.chatglm.cn/files/1750f38c-e3dd-4b33-93a0-efb125f86f91.jpg?auth_key=1875221104-a2f3eae11ae74f6f836b08dd3cd80ae6-0-3f879c430bf3c129fcdf671aadf82afd" 
+                             alt="Lebih Cepat Lebih Praktis" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-8">
+                        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="zap" class="w-6 h-6 text-blue-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-stone-900 mb-2">Lebih Cepat, Lebih Praktis</h3>
+                        <p class="text-stone-500 font-light leading-relaxed">Masak 4 telur sekaligus dalam waktu singkat. Hemat waktu tanpa mengorbankan kualitas.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card bg-white rounded-[1.5rem] border border-stone-200 overflow-hidden group">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://z-cdn-media.chatglm.cn/files/065b5d66-26ac-457c-9425-751ee8e318ba.jpg?auth_key=1875221104-cf017de10d7541878cb738d7284664b5-0-ed0e8c6fab7e05dc0d71cd59d9b7d91f" 
+                             alt="Matang Merata" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-8">
+                        <div class="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="flame" class="w-6 h-6 text-orange-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-stone-900 mb-2">Matang Merata, Siap Santap</h3>
+                        <p class="text-stone-500 font-light leading-relaxed">Chip pemanas NTC canggih memastikan telur dimasak hingga matang sempurna secara merata.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card bg-white rounded-[1.5rem] border border-stone-200 overflow-hidden group">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://z-cdn-media.chatglm.cn/files/bb2df319-bacc-4bdd-b04f-400da3a0f108.jpg?auth_key=1875221104-809bf429f504497f9ad38c0a74b9d9ce-0-0a9d2efda36c44b571eeb473fd86ab9e" 
+                             alt="Proteksi Anti Dry" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-8">
+                        <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="shield-alert" class="w-6 h-6 text-red-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-stone-900 mb-2">Proteksi Anti Kering</h3>
+                        <p class="text-stone-500 font-light leading-relaxed">Otomatis matikan pemanas saat air habis. Aman ditinggal tanpa khawatir overheat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timer / Reservation Feature -->
+        <section class="mt-24 scroll-animate">
+            <div class="bg-stone-900 rounded-[2rem] overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <div class="relative h-80 lg:h-auto overflow-hidden">
+                        <img src="https://z-cdn-media.chatglm.cn/files/9eb68143-5e21-4fb7-8108-5c144f720c68.jpg?auth_key=1875221104-ccf060ed53e94f14b167988e242c656d-0-6148229ea42345c1a9317c0b565b613f" 
+                             alt="Timer 24 Jam" 
+                             class="w-full h-full object-cover opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-stone-900 hidden lg:block"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-stone-900 to-transparent lg:hidden"></div>
+                    </div>
+                    <div class="p-10 sm:p-16 lg:p-20 flex flex-col justify-center">
+                        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-yellow-400 mb-6">
+                            <i data-lucide="clock" class="w-4 h-4"></i>
+                            Reservasi 24 Jam
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl font-600 text-white tracking-tight leading-tight mb-6">
+                            Telur Hangat<br>Setiap Pagi
+                        </h2>
+                        <p class="text-white/60 font-light text-lg leading-relaxed mb-8">
+                            Timer 24 jam memungkinkan Anda memasak dan menghangatkan telur sepanjang malam. Bangun pagi, telur siap santap — tanpa menunggu.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex items-center gap-3 text-white/80">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-green-400"></i>
+                                <span class="text-sm">Atur malam, siap pagi</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-white/80">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-green-400"></i>
+                                <span class="text-sm">Auto keep warm</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-white/80">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-green-400"></i>
+                                <span class="text-sm">Hemat listrik</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cara Penggunaan -->
+        <section class="mt-24 scroll-animate">
+            <div class="text-center mb-16">
+                <span class="inline-block text-xs font-semibold tracking-[0.15em] uppercase text-stone-400 mb-4">Mudah Sekali</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-600 tracking-tight text-stone-900">
+                    3 Langkah<br>
+                    <span class="text-stone-400">Simpel</span>
+                </h2>
+            </div>
+            
+            <div class="rounded-3xl overflow-hidden mb-12 product-img-hover">
+                <img src="https://z-cdn-media.chatglm.cn/files/c19ca7e1-508c-4a41-b3e6-a3dec39dfa21.jpg?auth_key=1875221104-d20a1fe8d6bd4639afb817f971e9a79a-0-d1d662e688494a11559f2142b51da3c2" 
+                     alt="Cara Penggunaan" 
+                     class="w-full h-auto object-cover">
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-[1.5rem] border border-stone-200 p-8 text-center relative">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-stone-900 rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
+                    <div class="w-16 h-16 mx-auto mb-5 bg-stone-50 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="egg" class="w-8 h-8 text-stone-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-stone-900 mb-2">Masukkan Telur</h3>
+                    <p class="text-sm text-stone-500 font-light">Letakkan hingga 4 butir telur pada egg tray yang tersedia.</p>
+                </div>
+                <div class="bg-white rounded-[1.5rem] border border-stone-200 p-8 text-center relative">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-stone-900 rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
+                    <div class="w-16 h-16 mx-auto mb-5 bg-stone-50 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="droplets" class="w-8 h-8 text-blue-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-stone-900 mb-2">Tambahkan Air</h3>
+                    <p class="text-sm text-stone-500 font-light">Tuang air ke dalam mesin hingga batas yang ditentukan.</p>
+                </div>
+                <div class="bg-white rounded-[1.5rem] border border-stone-200 p-8 text-center relative">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-stone-900 rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
+                    <div class="w-16 h-16 mx-auto mb-5 bg-stone-50 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="play-circle" class="w-8 h-8 text-green-500"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-stone-900 mb-2">Pilih Mode & Tunggu</h3>
+                    <p class="text-sm text-stone-500 font-light">Tekan tombol mode yang diinginkan dan biarkan mesin bekerja.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Panduan Penggunaan Lengkap -->
+        <section class="mt-24 scroll-animate">
+            <div class="bg-white rounded-[2rem] border border-stone-200 overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                    <div class="p-10 sm:p-16 flex flex-col justify-center">
+                        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-stone-400 mb-6">
+                            <i data-lucide="book-open" class="w-4 h-4"></i>
+                            Panduan Lengkap
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl font-600 text-stone-900 tracking-tight mb-6">
+                            Semua yang Anda<br>Butuhkan di Dalam Box
+                        </h2>
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-stone-100 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i data-lucide="check" class="w-5 h-5 text-stone-600"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-stone-900">1× Guesmi Egg Boiler SJ-200</div>
+                                    <div class="text-sm text-stone-400">Mesin utama warna putih elegan</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-stone-100 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i data-lucide="check" class="w-5 h-5 text-stone-600"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-stone-900">1× Egg Tray</div>
+                                    <div class="text-sm text-stone-400">Tempat telur untuk 4 butir</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-stone-100 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i data-lucide="check" class="w-5 h-5 text-stone-600"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-stone-900">1× Instruction Manual</div>
+                                    <div class="text-sm text-stone-400">Panduan penggunaan lengkap</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-stone-50 rounded-2xl p-6">
+                            <h4 class="text-sm font-semibold text-stone-900 mb-3">Spesifikasi</h4>
+                            <div class="grid grid-cols-2 gap-3 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-stone-400">Daya</span>
+                                    <span class="font-medium text-stone-700">200W</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-stone-400">Kapasitas</span>
+                                    <span class="font-medium text-stone-700">4 Telur</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-stone-400">Tinggi</span>
+                                    <span class="font-medium text-stone-700">14.5 cm</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-stone-400">Panjang</span>
+                                    <span class="font-medium text-stone-700">16.5 cm</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-stone-400">Lebar</span>
+                                    <span class="font-medium text-stone-700">15 cm</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-stone-400">Warna</span>
+                                    <span class="font-medium text-stone-700">Putih</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative min-h-[400px] lg:min-h-0 overflow-hidden bg-stone-100">
+                        <img src="https://z-cdn-media.chatglm.cn/files/bbc32f58-6b5d-4f0b-adb5-e291d9d08669.png?auth_key=1875221104-c5e3d641826640fbbc3840e91032a678-0-2c5e567c3026b4b1421337aaf5135cbc" 
+                             alt="Panduan Penggunaan Lengkap" 
+                             class="w-full h-full object-contain p-8">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Gallery -->
+        <section class="mt-24 scroll-animate">
+            <div class="text-center mb-16">
+                <span class="inline-block text-xs font-semibold tracking-[0.15em] uppercase text-stone-400 mb-4">Galeri Produk</span>
+                <h2 class="text-3xl sm:text-4xl font-600 tracking-tight text-stone-900">
+                    Desain Minimalis,<br>
+                    <span class="text-stone-400">Cocok di Dapur Mana Pun</span>
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="rounded-2xl overflow-hidden product-img-hover">
+                    <img src="https://z-cdn-media.chatglm.cn/files/eaf4e54b-caab-4893-91b7-f6e915686156.png?auth_key=1875221104-ce9689621c594895a7bb7ee4f806cdbc-0-5f9a43d92369229edeb0eacc58d854b3" 
+                         alt="Detail Produk" class="w-full h-64 sm:h-72 object-cover">
+                </div>
+                <div class="rounded-2xl overflow-hidden product-img-hover">
+                    <img src="https://z-cdn-media.chatglm.cn/files/62446c07-3c25-44df-a83e-7a90b818c2a5.jpg?auth_key=1875221104-e7d21b024504479f905c745551aa4ef6-0-6fed7997db008f8287e7a166090c071e" 
+                         alt="Di Dapur" class="w-full h-64 sm:h-72 object-cover">
+                </div>
+                <div class="rounded-2xl overflow-hidden product-img-hover sm:col-span-2 lg:col-span-1">
+                    <img src="https://z-cdn-media.chatglm.cn/files/bb2df319-bacc-4bdd-b04f-400da3a0f108.jpg?auth_key=1875221104-809bf429f504497f9ad38c0a74b9d9ce-0-0a9d2efda36c44b571eeb473fd86ab9e" 
+                         alt="Anti Dry" class="w-full h-64 sm:h-72 object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="mt-24 scroll-animate">
+            <div class="bg-white rounded-[2rem] border border-stone-200 p-10 sm:p-16">
+                <div class="text-center mb-12">
+                    <span class="inline-block text-xs font-semibold tracking-[0.15em] uppercase text-stone-400 mb-4">Perbandingan</span>
+                    <h2 class="text-3xl sm:text-4xl font-600 tracking-tight text-stone-900">
+                        Guesmi vs Rebus Manual
+                    </h2>
+                </div>
+                
+                <div class="max-w-2xl mx-auto">
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-3 gap-4 items-center">
+                            <div class="text-right">
+                                <span class="text-green-600 font-semibold text-sm">Guesmi Egg Boiler</span>
+                            </div>
+                            <div class="text-center text-xs font-medium text-stone-400 uppercase tracking-wider">Parameter</div>
+                            <div>
+                                <span class="text-stone-400 text-sm">Rebus Manual</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-stone-100"></div>
+                        
+                        <div class="grid grid-cols-3 gap-4 items-center py-3">
+                            <div class="text-right flex items-center justify-end gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                                <span class="text-sm font-medium text-stone-900">6 Mode</span>
+                            </div>
+                            <div class="text-center text-xs text-stone-400">Mode Masak</div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="x" class="w-4 h-4 text-red-400"></i>
+                                <span class="text-sm text-stone-400">1 Mode</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-stone-100"></div>
+                        
+                        <div class="grid grid-cols-3 gap-4 items-center py-3">
+                            <div class="text-right flex items-center justify-end gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                                <span class="text-sm font-medium text-stone-900">Otomatis</span>
+                            </div>
+                            <div class="text-center text-xs text-stone-400">Pengoperasian</div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="x" class="w-4 h-4 text-red-400"></i>
+                                <span class="text-sm text-stone-400">Manual</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-stone-100"></div>
+                        
+                        <div class="grid grid-cols-3 gap-4 items-center py-3">
+                            <div class="text-right flex items-center justify-end gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                                <span class="text-sm font-medium text-stone-900">Anti Kering</span>
+                            </div>
+                            <div class="text-center text-xs text-stone-400">Keamanan</div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="x" class="w-4 h-4 text-red-400"></i>
+                                <span class="text-sm text-stone-400">Berisiko</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-stone-100"></div>
+                        
+                        <div class="grid grid-cols-3 gap-4 items-center py-3">
+                            <div class="text-right flex items-center justify-end gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                                <span class="text-sm font-medium text-stone-900">Timer 24 Jam</span>
+                            </div>
+                            <div class="text-center text-xs text-stone-400">Reservasi</div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="x" class="w-4 h-4 text-red-400"></i>
+                                <span class="text-sm text-stone-400">Tidak Ada</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-stone-100"></div>
+                        
+                        <div class="grid grid-cols-3 gap-4 items-center py-3">
+                            <div class="text-right flex items-center justify-end gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                                <span class="text-sm font-medium text-stone-900">Matang Merata</span>
+                            </div>
+                            <div class="text-center text-xs text-stone-400">Hasil</div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="minus" class="w-4 h-4 text-stone-300"></i>
+                                <span class="text-sm text-stone-400">Kadang Tidak</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="mt-24 scroll-animate">
+            <div class="text-center mb-16">
+                <span class="inline-block text-xs font-semibold tracking-[0.15em] uppercase text-stone-400 mb-4">Testimoni</span>
+                <h2 class="text-3xl sm:text-4xl font-600 tracking-tight text-stone-900">
+                    Apa Kata<br>
+                    <span class="text-stone-400">Mereka?</span>
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-[1.5rem] border border-stone-200 p-8">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-stone-600 font-light leading-relaxed mb-6">"Soft boiled egg-nya sempurna! Anak-anak suka banget. Tinggal tekan tombol, nggak perlu jaga kompor."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-semibold text-sm">RA</div>
+                        <div>
+                            <div class="text-sm font-semibold text-stone-900">Rina A.</div>
+                            <div class="text-xs text-stone-400">Ibu Rumah Tangga</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-[1.5rem] border border-stone-200 p-8">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-stone-600 font-light leading-relaxed mb-6">"Timer 24 jam itu game changer. Setiap pagi langsung ada telur hangat buat sarapan sebelum kerja. Recommended!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-semibold text-sm">DP</div>
+                        <div>
+                            <div class="text-sm font-semibold text-stone-900">Dedi P.</div>
+                            <div class="text-xs text-stone-400">Karyawan Swasta</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-[1.5rem] border border-stone-200 p-8">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-stone-600 font-light leading-relaxed mb-6">"Bikin yogurt pakai mode L6 ternyata bisa! Desainnya clean, cocok di dapur minimalis. Worth every penny."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-semibold text-sm">SW</div>
+                        <div>
+                            <div class="text-sm font-semibold text-stone-900">Sari W.</div>
+                            <div class="text-xs text-stone-400">Content Creator</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="mt-24 scroll-animate">
+            <div class="relative bg-gradient-to-br from-red-600 via-red-600 to-red-700 rounded-[2rem] overflow-hidden p-10 sm:p-16 lg:p-20 text-center">
+                <div class="absolute inset-0 bg-grid opacity-10"></div>
+                <div class="absolute top-0 right-0 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+                
+                <div class="relative z-10 max-w-2xl mx-auto">
+                    <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md border border-white/20 rounded-full px-5 py-2.5 text-xs font-semibold tracking-widest uppercase text-white mb-8">
+                        <span class="w-2 h-2 bg-yellow-300 rounded-full animate-pulse"></span>
+                        Promo Terbatas
+                    </div>
+                    
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-700 text-white tracking-tight mb-6">
+                       Upgrade Sarapan Anda<br>Sekarang
+                    </h2>
+                    <p class="text-white/70 font-light text-lg mb-10 max-w-lg mx-auto">
+                        Jangan lewatkan kesempatan punya Guesmi Egg Boiler dengan harga spesial. Stok terbatas!
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="https://www.tokopedia.com/allesware/guesmi-electric-egg-boiler-4-slot-with-6-preset-modes-1734971950914372678" 
+                           target="_blank"
+                           onclick="fbq('track', 'InitiateCheckout', {content_name: 'Guesmi Egg Boiler', content_category: 'Kitchen Appliance'});"
+                           class="cta-btn inline-flex items-center justify-center gap-3 bg-white text-red-600 font-bold text-lg px-10 py-5 rounded-full">
+                            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                            Beli Sekarang di Tokopedia
+                        </a>
+                    </div>
+                    
+                    <p class="mt-6 text-white/40 text-sm flex items-center justify-center gap-2">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                        Pembayaran aman & terpercaya via Tokopedia
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="mt-24 scroll-animate">
+            <div class="text-center mb-16">
+                <span class="inline-block text-xs font-semibold tracking-[0.15em] uppercase text-stone-400 mb-4">FAQ</span>
+                <h2 class="text-3xl sm:text-4xl font-600 tracking-tight text-stone-900">
+                    Pertanyaan<br>
+                    <span class="text-stone-400">Umum</span>
+                </h2>
+            </div>
+            
+            <div class="max-w-2xl mx-auto space-y-3">
+                <div class="faq-item bg-white rounded-2xl border border-stone-200 overflow-hidden">
+                    <button class="faq-toggle w-full px-8 py-6 flex items-center justify-between text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-stone-900 pr-4">Berapa lama waktu masak soft boiled egg?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-stone-400 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-8 pb-0 max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="text-stone-500 font-light leading-relaxed pb-6">Waktu masak soft boiled egg (L1) sekitar 8-10 menit tergantung ukuran telur dan suhu awal. Mesin akan otomatis matiketika selesai.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-2xl border border-stone-200 overflow-hidden">
+                    <button class="faq-toggle w-full px-8 py-6 flex items-center justify-between text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-stone-900 pr-4">Apakah aman ditinggal saat menyala?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-stone-400 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-8 pb-0 max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="text-stone-500 font-light leading-relaxed pb-6">Ya, sangat aman! Guesmi Egg Boiler dilengkapi fitur proteksi anti kering yang otomatis mematikan pemanas saat air habis. Anda bisa tidur nyenyak dengan timer 24 jam.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-2xl border border-stone-200 overflow-hidden">
+                    <button class="faq-toggle w-full px-8 py-6 flex items-center justify-between text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-stone-900 pr-4">Bisa untuk telur bebek atau telur puyuh?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-stone-400 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-8 pb-0 max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="text-stone-500 font-light leading-relaxed pb-6">Bisa! Untuk telur bebek, gunakan waktu masak sedikit lebih lama. Untuk telur puyuh, Anda bisa memasak lebih banyak dalam satu batch karena ukurannya lebih kecil.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-2xl border border-stone-200 overflow-hidden">
+                    <button class="faq-toggle w-full px-8 py-6 flex items-center justify-between text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-stone-900 pr-4">Bagaimana cara membersihkannya?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-stone-400 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-8 pb-0 max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="text-stone-500 font-light leading-relaxed pb-6">Cukup lap bagian dalam dengan kain lembap setelah dingin. Egg tray dan penutup transparan bisa dicuci dengan air sabun. Jangan merendam mesin utama dalam air.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-24 mb-6">
+            <div class="bg-stone-900 rounded-[2rem] px-8 sm:px-12 lg:px-20 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-4">Guesmi</h3>
+                        <p class="text-white/40 font-light text-sm leading-relaxed">
+                            Elektronik dapur pintar untuk kehidupan modern. Didesain di Jepang, dibuat untuk Anda.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4">Tautan</h4>
+                        <ul class="space-y-3">
+                            <li>
+                                <a href="https://www.tokopedia.com/allesware/guesmi-electric-egg-boiler-4-slot-with-6-preset-modes-1734971950914372678" 
+                                   target="_blank"
+                                   class="text-white/40 hover:text-white text-sm transition-colors duration-150">Halaman Produk Tokopedia</a>
+                            </li>
+                            <li>
+                                <a href="#fitur" class="text-white/40 hover:text-white text-sm transition-colors duration-150">Fitur Produk</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-white/40 hover:text-white text-sm transition-colors duration-150">Kebijakan Privasi</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4">Dijual Oleh</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="store" class="w-4 h-4 text-white/30"></i>
+                                <span class="text-white/40 text-sm">Allesware - Tokopedia</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="package" class="w-4 h-4 text-white/30"></i>
+                                <span class="text-white/40 text-sm">Jakarta, Indonesia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p class="text-white/30 text-sm">&copy; 2026 Guesmi. Semua hak dilindungi.</p>
+                    <p class="text-white/20 text-xs">Dipasarkan oleh Allesware di Tokopedia</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Sticky Buy Bar (Mobile) -->
+    <div id="stickyBuy" class="sticky-buy fixed bottom-0 left-0 right-0 z-50 p-4 bg-white/95 backdrop-blur-lg border-t border-stone-200 lg:hidden">
+        <a href="https://www.tokopedia.com/allesware/guesmi-electric-egg-boiler-4-slot-with-6-preset-modes-1734971950914372678" 
+           target="_blank"
+           onclick="fbq('track', 'AddToCart', {content_name: 'Guesmi Egg Boiler', content_category: 'Kitchen Appliance'});"
+           class="cta-btn flex items-center justify-center gap-3 w-full bg-red-600 hover:bg-red-700 text-white font-bold text-base py-4 rounded-2xl">
+            <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+            Beli Sekarang — Tokopedia
+        </a>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast fixed bottom-24 lg:bottom-8 left-1/2 -translate-x-1/2 z-50 bg-stone-900 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm">
+        <i data-lucide="shopping-bag" class="w-4 h-4 text-green-400"></i>
+        <span id="toastText">Produk ditambahkan!</span>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        const stickyBuy = document.getElementById('stickyBuy');
+        const heroSection = document.querySelector('section');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > heroSection.offsetHeight - 200) {
+                stickyBuy.classList.add('show');
+            } else {
+                stickyBuy.classList.remove('show');
+            }
+        });
+
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const content = item.querySelector('.faq-content');
+            const icon = button.querySelector('.faq-icon');
+            const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+            
+            document.querySelectorAll('.faq-content').forEach(c => {
+                c.style.maxHeight = '0px';
+                c.style.paddingBottom = '0';
+            });
+            document.querySelectorAll('.faq-icon').forEach(i => {
+                i.style.transform = 'rotate(0deg)';
+            });
+            document.querySelectorAll('.faq-item').forEach(i => {
+                i.classList.remove('border-stone-300');
+            });
+            
+            if (!isOpen) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.style.transform = 'rotate(45deg)';
+                item.classList.add('border-stone-300');
+            }
+        }
+
+        function showToast(text) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toastText');
+            toastText.textContent = text;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        setTimeout(() => {
+            lucide.createIcons();
+        }, 100);
+    </script>
+</body>
+</html>
